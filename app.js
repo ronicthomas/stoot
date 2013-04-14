@@ -32,7 +32,12 @@ if ('development' == app.get('env')) {
 }
 
 server = http.createServer(app);
+io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+});
 io = io.listen(server).set("log level", 2);
+
 channelService.setup(io);
 
 app.get("/", routes.index);
