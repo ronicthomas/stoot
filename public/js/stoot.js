@@ -3,7 +3,7 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 
 /*Stoot */
 var STOOT = {
-    URL:"http://localhost:3000"
+    URL:"http://stoot.herokuapp.com"
 };
 function Stoot(apiKey) {
     var channels = [];
@@ -28,7 +28,6 @@ function Channel() {
                 .emit("event:register", {event:eventName, channelName:self.name}, callback);
 
         Stoot.registrationChannel.on(eventName, function (data) {
-            console.log("here")
             callback(data);
         })
     };
