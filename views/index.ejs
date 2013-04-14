@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="/javascripts/jquery-1.9.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/stoot.js"></script>
+    <script>
+
+        var stoot = new Stoot();
+        var channel = stoot.subscribe("myChannel");
+
+        channel.bindEvent('my-event', function(data) {
+            console.log("Received event callback");
+            console.log(data);
+        });
+
+        function showAlert() {
+            stoot.trigger("my-event", {msg: "Hello India!"})
+        }
+    </script>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<p>Welcome to <%= title %></p>
+
+<p>
+    <button onclick="showAlert()">Click me!</button>
+</p>
+</body>
+</html>

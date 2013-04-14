@@ -1,0 +1,12 @@
+.idea
+lib-cov
+*.seed
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+node_modules
+app.js
