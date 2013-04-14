@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Sign in &middot; Twitter Bootstrap</title>
+    <title>Stoot - The free pusher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -17,7 +17,7 @@
         }
 
         .form-signin {
-            max-width: 300px;
+            max-width: 600px;
             padding: 19px 29px 29px;
             margin: 0 auto 20px;
             background-color: #fff;
@@ -64,9 +64,41 @@
 <div class="container">
 
     <form class="form-signin" action="/auth/openid" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Email address" name="openid_identifier">
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <h2 class="form-signin-heading">Use this UUID for using Stoot in your application</h2>
+
+        <div class="well">
+            <%= uuid %>
+        </div>
+        <ul>
+            <li>Add this code at the bottom of your page: <br>
+                <code>
+                    &lt;script type='text/javascript' src='http://stoot.herokuapp.com/js/stoot.js'&gt;
+                </code>
+            </li>
+            <li>Register your API key by calling the following code:
+                <code>
+                    var stoot = new Stoot("<%= uuid.replace('-','') %>");
+                </code>
+            </li>
+            <li>Register a new channel by calling the subscribe method:
+                <code>
+                    var channel = stoot.subscribe("my-channel");
+                </code>
+            </li>
+            <li>Register a new event by calling the bindEvent method:
+                <code>
+                    channel.bindEvent("my-event", function(data) {
+                      console.log(data);
+                    });
+                </code>
+            </li>
+            <li>Trigger the event by calling the trigger event method:
+                <code>
+                    stoot.trigger("my-event", {msg: "hello"});
+                </code>
+            </li>
+        </ul>
+        <!--<button class="btn btn-large btn-primary" type="submit">Sign in</button>-->
     </form>
 
 </div>
@@ -75,8 +107,7 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/javascripts/jquery-1.9.1.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script src="/static/stoot.js"></script>
 
 </body>
 </html>

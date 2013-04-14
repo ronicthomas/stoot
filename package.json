@@ -1,17 +1,18 @@
 {
-  "name": "stoot",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "express": "3.1.1",
-    "mongoose": "*",
-    "ejs": "*"
-  },
-  "engines": {
-    "node": "0.8.21",
-    "npm": "1.2.12"
-  }
+    "name":"stoot",
+    "version":"0.0.1",
+    "private":true,
+    "scripts":{
+        "start":"node app.js"
+    },
+    "dependencies":{
+        "express":"3.1.1",
+        "ejs":"*",
+        "config":"*",
+        "node-uuid":"*"
+    },
+    "engines":{
+        "node":"0.8.21",
+        "npm":"1.2.12"
+    }
 }

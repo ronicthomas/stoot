@@ -1,7 +1,3 @@
 exports.index = function (req, res) {
-    if (req.user) {
-        res.render("dashboard")
-    } else {
-        res.render("index");
-    }
+    res.render("index", {title:"Stoot", uuid: require('node-uuid')()});
 };
