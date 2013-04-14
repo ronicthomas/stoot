@@ -3,14 +3,17 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 
 /*Stoot */
 var STOOT = {
-    URL:"http://stoot.herokuapp.com"
+    URL:"http://localhost:3000"
 };
 function Stoot(apiKey) {
     var channels = [];
     var self = this;
     self.subscribe = function (channelName) {
         Stoot.registrationChannel.emit("channel:register", {name:channelName, apiKey: apiKey});
-        return new Channel();
+        if (channels[channelName] === undefined) {
+            channels[channelName] = new Channel();
+        }
+        return channels[channelName];
     };
 
     self.trigger = function (ename, data) {
@@ -25,6 +28,7 @@ function Channel() {
                 .emit("event:register", {event:eventName, channelName:self.name}, callback);
 
         Stoot.registrationChannel.on(eventName, function (data) {
+            console.log("here")
             callback(data);
         })
     };

@@ -1,8 +1,10 @@
 exports.setup = function (io) {
-    io.configure(function () {
-        io.set("transports", ["xhr-polling"]);
-        io.set("polling duration", 10);
-    });
+    if (process.env.ENVIRONMENT === "production") {
+        io.configure(function () {
+            io.set("transports", ["xhr-polling"]);
+            io.set("polling duration", 10);
+        });
+    }
 
     io.sockets.on("connection", function (socket) {
         socket.on("channel:register", function (data) {
@@ -12,9 +14,10 @@ exports.setup = function (io) {
             socket.emit("channel:register-success", "Channel \"" + data.name + "\" has been registered!")
         });
 
-        socket.on("event:register", function (data, fn) {
+        socket.on("event:register", function (data) {
+            var event = data.event;
             socket.on(data.event, function (data) {
-                io.sockets.in(socket.room).emit(data.event, data)
+                io.sockets.in(socket.room).emit(event, data)
             });
 
             socket.emit("event:register-success", "Event registered successfully: " + data.event);
