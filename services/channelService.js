@@ -1,15 +1,19 @@
-exports.registerEvent = function (data, fn) {
-    console.log(data);
-    console.log(fn);
-    var channel = io.of("/" + data.channelName).on('connection', function (socket) {
-        channel.on(data.event, function (d) {
-            console.log("Found me!")
+exports.setup = function (io) {
+    io.sockets.on("connection", function (socket) {
+        socket.on("channel:register", function (data) {
+            socket.room = data.name;
+            socket.join(data.name);
+            socket.emit("channel:register-success", "Channel \"" + data.name + "\" has been registered!")
         });
 
-        socket.emit("channel:connect", "Connected to channel: " + data.channelName)
+        socket.on("event:register", function (data, fn) {
+            console.log(fn);
+            socket.on(data.event, function (data) {
+                console.log("in here");
+                io.sockets.in(socket.room).emit(data.event, data)
+            });
+
+            socket.emit("event:register-success", "Event registered successfully: " + data.event);
+        })
     });
-
-
-
-    console.log(io.namespaces);
 };
