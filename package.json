@@ -9,7 +9,8 @@
         "express":"3.1.1",
         "ejs":"*",
         "config":"*",
-        "node-uuid":"*"
+        "node-uuid":"*",
+        "socket.io":"*"
     },
     "engines":{
         "node":"0.8.21",
