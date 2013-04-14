@@ -1,4 +1,9 @@
 exports.setup = function (io) {
+    io.configure(function () {
+        io.set("transports", ["xhr-polling"]);
+        io.set("polling duration", 10);
+    });
+
     io.sockets.on("connection", function (socket) {
         socket.on("channel:register", function (data) {
             var roomName = data.apiKey + "/" + data.name;
