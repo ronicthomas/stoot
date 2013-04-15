@@ -33,7 +33,7 @@ if ('development' == app.get('env')) {
 
 server = http.createServer(app);
 
-//io = io.listen(server).set("log level", 2);
+io = io.listen(server);//.set("log level", 2);
 
 channelService.setup(io);
 
