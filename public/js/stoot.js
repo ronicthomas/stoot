@@ -3,7 +3,7 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 
 /*Stoot */
 var STOOT = {
-    URL:"http://stoot.herokuapp.com"
+    URL:"http://stoot.herokuapp.com/"
 };
 function Stoot(apiKey) {
     var channels = [];
@@ -33,7 +33,7 @@ function Channel() {
     };
 }
 
-Stoot.registrationChannel = io.connect(STOOT.URL)
+Stoot.registrationChannel = io.connect("http://stoot.herokuapp.com/")
         .on("channel:register-success",function (data) {
             console.log(data);
         }).on("event:register-success", function (data) {
