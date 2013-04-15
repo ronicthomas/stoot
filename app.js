@@ -33,11 +33,11 @@ if ('development' == app.get('env')) {
 
 server = http.createServer(app);
 
-io = io.listen(server).set("log level", 2);
+//io = io.listen(server).set("log level", 2);
 
 channelService.setup(io);
 
-app.get("/login", routes.index);
+app.get("/", routes.index);
 
 server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
