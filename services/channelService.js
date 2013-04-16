@@ -17,7 +17,8 @@ exports.setup = function (io) {
         socket.on("event:register", function (data) {
             var event = data.event;
             socket.on(data.event, function (data) {
-                io.sockets.in(socket.room).emit(event, data)
+                var roomName = data.apiKey + "/" + data.channel;
+                io.sockets.in(roomName).emit(event, data)
             });
 
             socket.emit("event:register-success", "Event registered successfully: " + data.event);

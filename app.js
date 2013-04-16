@@ -38,6 +38,10 @@ io = io.listen(server);//.set("log level", 2);
 channelService.setup(io);
 
 app.get("/", routes.index);
+app.get("/static/stoot.js", function(req,res) {
+    res.set("Content-type", "text/javascript");
+    res.render('stoot.ejs',{url:require('config').SERVER.url});
+});
 
 server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
