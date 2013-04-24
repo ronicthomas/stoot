@@ -69,12 +69,18 @@ app.get("/static/stoot.js", function (req, res) {
 app.get("/stoot/triggerEvent", function (req, res) {
     var channel = req.query.channel;
     var event = req.query.event;
-    var data = req.query.data;
-    var apiKey = "3345cd5532d7-44b8-ae4b-0f77a29d3663";
-    console.log([channel, event, data, apiKey + "/" + channel]);
-    console.log(io.sockets.clients(apiKey + "/" + channel));
-    io.sockets.in(apiKey + "/" + channel).emit(event, data);
-    res.send('success');
+    var data = req.query.data || {};
+    var apiKey = req.query.apiKey;
+    if (!apiKey) {
+        res.status(500).send({error:'Missing API key', success:false})
+    } else if (!channel) {
+        res.status(500).send({error:'Missing channel name', success:false})
+    } else if (!event) {
+        res.status(500).send({error:'Missing event name', success:false})
+    } else {
+        io.sockets.in(apiKey + "/" + channel).emit(event, data);
+        res.status(200).send({message:'Event triggered', success:true})
+    }
 });
 
 server.listen(app.get('port'), function () {
