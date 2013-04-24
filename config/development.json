@@ -1,5 +1,9 @@
 {
     "SERVER":{
-        "url": "http://localhost:3000/"
+        "url":"http://localhost:3000/"
+    },
+    "OAUTH":{
+        "clientID": "523311793470-0ga1undb1rmcr215freq6go3sfpi9lta.apps.googleusercontent.com",
+        "clientSecret": "d1lGDIUMQVkzZivvblA_NHfJ"
     }
 }

@@ -31,7 +31,7 @@ function Channel() {
     };
 }
 
-Stoot.registrationChannel = io.connect("http://stoot.herokuapp.com/")
+Stoot.registrationChannel = io.connect(STOOT.URL)
         .on("channel:register-success",function (data) {
             console.log(data);
         }).on("event:register-success", function (data) {
