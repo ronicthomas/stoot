@@ -18,8 +18,8 @@ passport.use(new GoogleStrategy({
             returnURL:SERVER_CONFIG.url + 'auth/google/return',
             realm:SERVER_CONFIG.url
         },
-        function (identifier, profile, done) {
-            console.log(identifier);
+        function (identifier, done) {
+            console.log("Identifier: " + identifier);
         }
 ));
 
@@ -55,18 +55,18 @@ app.post('/auth/google', passport.authenticate('google'));
 // Google will redirect the user to this URL after authentication.  Finish
 // the process by verifying the assertion.  If valid, the user will be
 // logged in.  Otherwise, authentication has failed.
-app.get('/auth/google/return',
-        passport.authenticate('google', { successRedirect:'/',
-            failureRedirect:'/login' }));
+app.get('/auth/google/return', passport.verifyAssertion('google'));
 
 
 app.get("/", routes.index);
+app.get("/dashboard", routes.dashboard);
+
 app.get("/static/stoot.js", function (req, res) {
     res.set("Content-type", "text/javascript");
     res.render('stoot.ejs', {url:require('config').SERVER.url});
 });
 
-app.get("/stoot/triggerEvent", function (req, res) {
+app.all("/stoot/triggerEvent", function (req, res) {
     var channel = req.query.channel;
     var event = req.query.event;
     var data = req.query.data || {};
