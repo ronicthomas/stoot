@@ -11,17 +11,6 @@ var express = require('express')
         , SERVER_CONFIG = require('config').SERVER
         , server;
 
-var passport = require('passport')
-        , GoogleStrategy = require('passport-google').Strategy;
-
-passport.use(new GoogleStrategy({
-            returnURL:SERVER_CONFIG.url + 'auth/google/return',
-            realm:SERVER_CONFIG.url
-        },
-        function (identifier, done) {
-            console.log("Identifier: " + identifier);
-        }
-));
 
 var app = express();
 
@@ -50,16 +39,10 @@ io = io.listen(server);//.set("log level", 2);
 channelService.setup(io);
 
 
-app.post('/auth/google', passport.authenticate('google'));
-
-// Google will redirect the user to this URL after authentication.  Finish
-// the process by verifying the assertion.  If valid, the user will be
-// logged in.  Otherwise, authentication has failed.
-app.get('/auth/google/return', passport.verifyAssertion('google'));
-
-
 app.get("/", routes.index);
+
 app.get("/dashboard", routes.dashboard);
+app.post("/authenticate", routes.authenticate);
 
 app.get("/static/stoot.js", function (req, res) {
     res.set("Content-type", "text/javascript");
@@ -67,10 +50,10 @@ app.get("/static/stoot.js", function (req, res) {
 });
 
 app.all("/stoot/triggerEvent", function (req, res) {
-    var channel = req.query.channel;
-    var event = req.query.event;
-    var data = req.query.data || {};
-    var apiKey = req.query.apiKey;
+    var channel = req.param('channel');
+    var event = req.param('event');
+    var data = req.param('data') || {};
+    var apiKey = req.param('apiKey');
     if (!apiKey) {
         res.status(500).send({error:'Missing API key', success:false})
     } else if (!channel) {
