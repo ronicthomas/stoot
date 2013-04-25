@@ -54,6 +54,7 @@ app.all("/stoot/triggerEvent", function (req, res) {
     var event = req.param('event');
     var data = req.param('data') || {};
     var apiKey = req.param('apiKey');
+    console.log("Received params: " + [apiKey, channel, event, data]);
     if (!apiKey) {
         res.status(500).send({error:'Missing API key', success:false})
     } else if (!channel) {
