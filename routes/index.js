@@ -1,5 +1,5 @@
 exports.index = function (req, res) {
-    res.render('index', {})
+    res.render('index', {uuid: require('node-uuid').v1()})
 };
 
 exports.dashboard = function (req, res) {

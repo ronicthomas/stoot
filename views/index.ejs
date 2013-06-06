@@ -63,43 +63,53 @@
 
 <div class="container">
 
-    <form class="form-signin" action="/auth/google" method="post">
-        <!--<h2 class="form-signin-heading">Use this UUID for using Stoot in your application</h2>
 
-        <div class="well">
-            <%= uuid %>
-        </div>
-        <ul>
-            <li>Add this code at the bottom of your page: <br>
-                <code>
-                    &lt;script type='text/javascript' src='http://stoot.herokuapp.com/js/stoot.ejs'&gt;
-                </code>
-            </li>
-            <li>Register your API key by calling the following code:
-                <code>
-                    var stoot = new Stoot("<%= uuid.replace('-','') %>");
-                </code>
-            </li>
-            <li>Register a new channel by calling the subscribe method:
-                <code>
-                    var channel = stoot.subscribe("my-channel");
-                </code>
-            </li>
-            <li>Register a new event by calling the bindEvent method:
-                <code>
-                    channel.bindEvent("my-event", function(data) {
-                      console.log(data);
-                    });
-                </code>
-            </li>
-            <li>Trigger the event by calling the trigger event method:
-                <code>
-                    stoot.trigger("my-event", {msg: "hello"});
-                </code>
-            </li>
-        </ul>-->
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-    </form>
+    <h2 class="form-signin-heading">Use this UUID for using Stoot in your application</h2>
+
+    <div class="well">
+        <%= uuid %>
+    </div>
+    <ul>
+        <li>Add this code at the bottom of your page: <br>
+            <code>
+                &lt;script type='text/javascript' src='http://stoot.herokuapp.com/js/stoot.ejs'&gt;
+            </code>
+        </li>
+        <li>Register your API key by calling the following code:
+            <code>
+                var stoot = new Stoot("<%= uuid.replace('-','') %>");
+            </code>
+        </li>
+        <li>Register a new channel by calling the subscribe method:
+            <code>
+                var channel = stoot.subscribe("my-channel");
+            </code>
+        </li>
+        <li>Register a new event by calling the bindEvent method:
+            <br>
+            <code>
+                channel.bind("my-event", function(data) {
+                console.log(data);
+                });
+
+            </code>
+        </li>
+        <li>Trigger the event by calling the trigger event method:
+            <code>
+                stoot.trigger("my-channel", "my-event", {msg: "hello"});
+            </code>
+        </li>
+        <li>Or trigger the event by using a utility like curl to do something like :
+            <code>
+                curl 'http://stoot.herokuapp.com/stoot/triggerEvent' --data='channel=&lt;channel name&gt;&amp;event=&lt;event&gt;&amp;data=&lt;json
+                data&gt;&amp;apiKey=&lt;api_key&gt;'
+            </code>
+            <br>
+            ... or a GET call would also do ;)
+
+        </li>
+    </ul>
+
 
 </div>
 <!-- /container -->
