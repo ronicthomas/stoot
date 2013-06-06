@@ -62,6 +62,7 @@ app.all("/stoot/triggerEvent", function (req, res) {
     } else if (!event) {
         res.status(500).send({error:'Missing event name', success:false})
     } else {
+        
         io.sockets.in(apiKey + "/" + channel).emit(event, data);
         res.status(200).send({message:'Event triggered', success:true})
     }
