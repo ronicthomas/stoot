@@ -2,6 +2,10 @@
  * Module dependencies.
  */
 
+if (process.env.NODE_ENV === "production") {
+    require('newrelic');
+}
+
 var express = require('express')
         , routes = require('./routes')
         , http = require('http')
@@ -38,7 +42,6 @@ io = io.listen(server);//.set("log level", 2);
 
 channelService.setup(io);
 
-
 app.get("/", routes.index);
 
 app.get("/dashboard", routes.dashboard);
@@ -49,7 +52,7 @@ app.get("/static/stoot.js", function (req, res) {
     res.render('stoot.ejs', {url:require('config').SERVER.url});
 });
 
-app.get("/util/pinger", function(req, res) {
+app.get("/util/pinger", function (req, res) {
     res.send("Running app")
 });
 

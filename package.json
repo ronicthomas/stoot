@@ -13,7 +13,8 @@
         "socket.io":"*",
         "passport":"*",
         "passport-oauth":"*",
-        "passport-google":"*"
+        "passport-google":"*",
+        "newrelic": "*"
     },
     "engines":{
         "node":"0.8.21",

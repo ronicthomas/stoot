@@ -1,13 +1,15 @@
 exports.setup = function (io) {
-    if (process.env.ENVIRONMENT === "production") {
-        io.configure(function () {
-            io.set("transports", ["xhr-polling"]);
-            io.set("polling duration", 10);
-        });
-    }
-
+    io.configure("production", function () {
+        io.set("transports", [
+            'websocket'
+            , 'flashsocket'
+            , 'htmlfile'
+            , 'xhr-polling'
+            , 'jsonp-polling'
+        ]);
+    });
     io.sockets.on("connection", function (socket) {
-        console.log("clients: " + io.sockets.clients("3345cd5532d7-44b8-ae4b-0f77a29d3663/my-channel") );
+        console.log("clients: " + io.sockets.clients("3345cd5532d7-44b8-ae4b-0f77a29d3663/my-channel"));
 
         socket.on("channel:register", function (data) {
             var roomName = data.apiKey + "/" + data.name;
