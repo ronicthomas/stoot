@@ -50,7 +50,7 @@ app.get("/static/stoot.js", function (req, res) {
 });
 
 app.get("/util/pinger", function(req, res) {
-    res.send("Running")
+    res.send("Running app")
 });
 
 app.all("/stoot/triggerEvent", function (req, res) {
