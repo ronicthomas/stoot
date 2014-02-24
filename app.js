@@ -49,6 +49,10 @@ app.get("/static/stoot.js", function (req, res) {
     res.render('stoot.ejs', {url:require('config').SERVER.url});
 });
 
+app.get("/util/pinger", function(req, res) {
+    res.send("Running")
+});
+
 app.all("/stoot/triggerEvent", function (req, res) {
     var channel = req.param('channel');
     var event = req.param('event');
