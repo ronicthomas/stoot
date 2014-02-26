@@ -10,7 +10,7 @@
         "ejs":"*",
         "config":"*",
         "node-uuid":"*",
-        "socket.io":"*",
+        "socket.io":"0.9.11",
         "passport":"*",
         "passport-oauth":"*",
         "passport-google":"*",
