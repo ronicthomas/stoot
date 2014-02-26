@@ -1,15 +1,12 @@
 exports.setup = function (io) {
     io.configure("production", function () {
         io.set("transports", [
-            'websocket',
-            'flashsocket',
-            'htmlfile',
-            'xhr-polling',
-            'jsonp-polling'
+            'xhr-polling'
         ]);
         io.set("polling duration", 10);
     });
     io.sockets.on("connection", function (socket) {
+
         socket.on("channel:register", function (data) {
             var roomName = data.apiKey + "/" + data.name;
             socket.room = roomName;
