@@ -7,6 +7,7 @@ exports.setup = function (io) {
             , 'xhr-polling'
             , 'jsonp-polling'
         ]);
+        io.set("polling duration", 10);
     });
     io.sockets.on("connection", function (socket) {
         console.log("clients: " + io.sockets.clients("3345cd5532d7-44b8-ae4b-0f77a29d3663/my-channel"));
