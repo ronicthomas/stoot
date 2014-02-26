@@ -1,11 +1,16 @@
 exports.setup = function (io) {
     io.configure("production", function () {
         io.set("transports", [
-            'xhr-polling'
+            'websocket'
+            , 'flashsocket'
+            , 'htmlfile'
+            , 'xhr-polling'
+            , 'jsonp-polling'
         ]);
-        io.set("polling duration", 10);
+        io.set("polling duration", 20);
     });
     io.sockets.on("connection", function (socket) {
+        console.log("clients: " + io.sockets.clients("3345cd5532d7-44b8-ae4b-0f77a29d3663/my-channel"));
 
         socket.on("channel:register", function (data) {
             var roomName = data.apiKey + "/" + data.name;
