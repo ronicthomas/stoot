@@ -1,12 +1,6 @@
 exports.setup = function (io) {
     io.configure("production", function () {
-        io.set("transports", [
-            'websocket'
-            , 'flashsocket'
-            , 'htmlfile'
-            , 'xhr-polling'
-            , 'jsonp-polling'
-        ]);
+        io.set("transports", ['xhr-polling']);
         io.set("polling duration", 10);
     });
     io.sockets.on("connection", function (socket) {
